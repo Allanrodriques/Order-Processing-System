@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - mongodb_data:/data/db
+
+  order-service:
+    build:
+      context: ./order-service
+
+    container_name: order-service
+
+    env_file:
+      - .env
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - mongodb
+
+  payment-service:
+    build:
+      context: ./payment-service
+
+    container_name: payment-service
+
+    env_file:
+      - .env
+
+    depends_on:
+      - mongodb
+
+  inventory-service:
+    build:
+      context: ./inventory-service
+
+    container_name: inventory-service
+
+    env_file:
+      - .env
+
+    depends_on:
+      - mongodb
+
+  shipping-service:
+    build:
+      context: ./shipping-service
+
+    container_name: shipping-service
+
+    env_file:
+      - .env
+
+    depends_on:
+      - mongodb
+
+  notification-service:
+    build:
+      context: ./notification-service
+
+    container_name: notification-service
+
+    env_file:
+      - .env
+
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: frontend
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - order-service
+
+volumes:
+  mongodb_data:
