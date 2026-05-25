@@ -1,11 +1,9 @@
-version: "3.9"
-
 services:
 
   mongodb:
-    image: mongo:latest
+    image: mongo:7
     container_name: mongodb
-    restart: always
+    restart: unless-stopped
 
     ports:
       - "27017:27017"
@@ -13,9 +11,13 @@ services:
     volumes:
       - mongodb_data:/data/db
 
+    networks:
+      - order-network
+
   order-service:
     build:
-      context: ./order-service
+      context: .
+      dockerfile: order-service/Dockerfile
 
     container_name: order-service
 
@@ -28,9 +30,13 @@ services:
     depends_on:
       - mongodb
 
+    networks:
+      - order-network
+
   payment-service:
     build:
-      context: ./payment-service
+      context: .
+      dockerfile: payment-service/Dockerfile
 
     container_name: payment-service
 
@@ -40,9 +46,13 @@ services:
     depends_on:
       - mongodb
 
+    networks:
+      - order-network
+
   inventory-service:
     build:
-      context: ./inventory-service
+      context: .
+      dockerfile: inventory-service/Dockerfile
 
     container_name: inventory-service
 
@@ -52,9 +62,13 @@ services:
     depends_on:
       - mongodb
 
+    networks:
+      - order-network
+
   shipping-service:
     build:
-      context: ./shipping-service
+      context: .
+      dockerfile: shipping-service/Dockerfile
 
     container_name: shipping-service
 
@@ -64,18 +78,26 @@ services:
     depends_on:
       - mongodb
 
+    networks:
+      - order-network
+
   notification-service:
     build:
-      context: ./notification-service
+      context: .
+      dockerfile: notification-service/Dockerfile
 
     container_name: notification-service
 
     env_file:
       - .env
 
+    networks:
+      - order-network
+
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: frontend/Dockerfile
 
     container_name: frontend
 
@@ -84,6 +106,12 @@ services:
 
     depends_on:
       - order-service
+
+    networks:
+      - order-network
+
+networks:
+  order-network:
 
 volumes:
   mongodb_data:

@@ -2,12 +2,12 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY order-service/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY order-service/ .
 
-EXPOSE 3000
+COPY shared ./shared
 
-CMD ["node", "server.js"] 
+CMD ["node", "server.js"]

@@ -2,12 +2,12 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY notification-service/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY notification-service/ .
 
-EXPOSE 3000
+COPY shared ./shared
 
 CMD ["node", "notification.js"]

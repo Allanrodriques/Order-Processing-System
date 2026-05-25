@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+  namespace: order-processing
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: inventory-service
+
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+
+    spec:
+      containers:
+      - name: inventory-service
+
+        image: allan1804/inventory-service:v1
+        imagePullPolicy: Always
+
+        envFrom:
+        - configMapRef:
+            name: order-config
+
+        - secretRef:
+            name: solace-secret

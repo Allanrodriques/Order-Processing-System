@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping-service
+  namespace: order-processing
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: shipping-service
+
+  template:
+    metadata:
+      labels:
+        app: shipping-service
+
+    spec:
+      containers:
+      - name: shipping-service
+
+        image: allan1804/shipping-service:v1
+        imagePullPolicy: Always
+
+        envFrom:
+        - configMapRef:
+            name: order-config
+
+        - secretRef:
+            name: solace-secret

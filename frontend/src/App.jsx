@@ -10,7 +10,7 @@ function App() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "http://136.114.90.19:3000/orders"
+        "http://35.254.143.197:3000/orders"
       );
 
       setOrders(response.data);
@@ -36,7 +36,7 @@ function App() {
     try {
 
       await axios.post(
-        "http://136.114.90.19:3000/orders",
+        "http://35.254.143.197:3000/orders",
         {
           product,
           quantity,

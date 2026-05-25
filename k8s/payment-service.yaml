@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+  namespace: order-processing
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: payment-service
+
+  template:
+    metadata:
+      labels:
+        app: payment-service
+
+    spec:
+      containers:
+      - name: payment-service
+
+        image: allan1804/payment-service:v1 
+
+        envFrom:
+        - configMapRef:
+            name: order-config
+
+        - secretRef:
+            name: solace-secret

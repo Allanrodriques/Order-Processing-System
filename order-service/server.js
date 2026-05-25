@@ -3,8 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const solace = require("solclientjs");
-const connectDB = require("../shared/db/mongo");
-const Order = require("../shared/models/Order");
+const connectDB = require("./shared/db/mongo");
+const Order = require("./shared/models/Order");
 
 connectDB();
 

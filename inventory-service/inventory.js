@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const solace = require("solclientjs");
 
-const connectDB = require("../shared/db/mongo");
-const Order = require("../shared/models/Order");
+const connectDB = require("./shared/db/mongo");
+const Order = require("./shared/models/Order");
 
 connectDB();
 

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-config
+  namespace: order-processing
+
+data:
+  SOLACE_HOST: "wss://mr-connection-vj14jrggeun.messaging.solace.cloud:443"
+  SOLACE_VPN: "ep-codelab"
+  MONGO_URI: "mongodb://mongodb:27017/orderdb"
+
