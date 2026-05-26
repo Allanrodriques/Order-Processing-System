@@ -1,3 +1,4 @@
+require("./tracing");
 require("dotenv").config();
 
 const solace = require("solclientjs");

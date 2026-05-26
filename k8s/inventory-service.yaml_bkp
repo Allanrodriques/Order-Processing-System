@@ -20,18 +20,8 @@ spec:
       containers:
       - name: inventory-service
 
-        image: allan1804/inventory-service:v2
+        image: allan1804/inventory-service:v1
         imagePullPolicy: Always
-
-        env:
-        - name: OTEL_SERVICE_NAME
-          value: inventory-service
-
-        - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-          value: http://jaeger.observability:4318/v1/traces
-
-        - name: OTEL_TRACES_EXPORTER
-          value: otlp
 
         envFrom:
         - configMapRef:

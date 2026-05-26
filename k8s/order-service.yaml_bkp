@@ -20,20 +20,10 @@ spec:
       containers:
       - name: order-service
 
-        image: allan1804/order-service:v3
+        image: allan1804/order-service:v1 
 
         ports:
         - containerPort: 3000
-
-        env:
-        - name: OTEL_SERVICE_NAME
-          value: order-service
-
-        - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-          value: http://jaeger.observability:4318/v1/traces
-
-        - name: OTEL_TRACES_EXPORTER
-          value: otlp
 
         envFrom:
         - configMapRef:
@@ -56,6 +46,5 @@ spec:
   ports:
   - port: 3000
     targetPort: 3000
-    nodePort: 30080
 
-  type: NodePort
+  type: ClusterIP

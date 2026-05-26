@@ -9,9 +9,7 @@ function App() {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(
-        "http://35.188.111.232:30080/orders"
-      );
+      const response = await axios.get("http://34.134.205.72:30080/orders");
 
       setOrders(response.data);
 
@@ -36,7 +34,7 @@ function App() {
     try {
 
       await axios.post(
-        "http://35.188.111.232:30080/orders",
+        "http://34.134.205.72:30080/orders",
         {
           product,
           quantity,
